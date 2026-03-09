@@ -1,85 +1,90 @@
-const canvas = document.getElementById("matrix")
-const ctx = canvas.getContext("2d")
+// MATRIX BACKGROUND
 
-canvas.height = window.innerHeight
-canvas.width = window.innerWidth
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
 
-const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-const fontSize = 14
-const columns = canvas.width / fontSize
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
 
-const drops = []
+const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const fontSize = 16;
+const columns = canvas.width / fontSize;
 
-for(let x = 0; x < columns; x++)
-drops[x] = 1
+const drops = [];
+
+for(let i = 0; i < columns; i++){
+drops[i] = 1;
+}
 
 function draw(){
+ctx.fillStyle = "rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
 
-ctx.fillStyle = "rgba(0,0,0,0.05)"
-ctx.fillRect(0,0,canvas.width,canvas.height)
+ctx.fillStyle = "#0f0";
+ctx.font = fontSize + "px monospace";
 
-ctx.fillStyle = "#0f0"
-ctx.font = fontSize + "px monospace"
+for(let i = 0; i < drops.length; i++){
 
-for(let i=0;i<drops.length;i++){
+const text = letters[Math.floor(Math.random()*letters.length)];
 
-let text = letters.charAt(Math.floor(Math.random()*letters.length))
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
 
-ctx.fillText(text,i*fontSize,drops[i]*fontSize)
+if(drops[i]*fontSize > canvas.height && Math.random()>0.975)
+drops[i] = 0;
 
-if(drops[i]*fontSize > canvas.height && Math.random() > 0.975)
-drops[i] = 0
-
-drops[i]++
-
+drops[i]++;
+}
 }
 
-}
-
-setInterval(draw,33)
+setInterval(draw,33);
 
 
-const input = document.getElementById("cmd")
-const terminal = document.getElementById("terminal")
+// TERMINAL
+
+const input = document.getElementById("command");
+const output = document.getElementById("output");
+
+if(input){
 
 input.addEventListener("keydown",function(e){
 
 if(e.key === "Enter"){
 
-let cmd = input.value
-input.value = ""
+const cmd = input.value;
 
-let line = document.createElement("div")
-line.innerHTML = "> " + cmd
-terminal.appendChild(line)
+output.innerHTML += "<div>> "+cmd+"</div>";
 
-let res = document.createElement("div")
+if(cmd === "hack"){
 
-if(cmd === "help"){
-res.innerHTML = "Comandos: help | acessar | limpar | segredo"
+output.innerHTML += "<div>Iniciando ataque...</div>";
+output.innerHTML += "<div>Quebrando firewall...</div>";
+output.innerHTML += "<div>Acesso concedido ✔</div>";
+
 }
 
-else if(cmd === "acessar"){
-res.innerHTML = "Acessando sistema..."
+else if(cmd === "scan"){
+
+output.innerHTML += "<div>Escaneando rede...</div>";
+output.innerHTML += "<div>IP encontrado: 192.168.0.1</div>";
+
 }
 
-else if(cmd === "segredo"){
-res.innerHTML = "Arquivo secreto encontrado"
-}
+else if(cmd === "clear"){
 
-else if(cmd === "limpar"){
-location.reload()
-return
+output.innerHTML = "";
+
 }
 
 else{
-res.innerHTML = "Comando desconhecido"
-}
 
-terminal.appendChild(res)
-
-window.scrollTo(0,document.body.scrollHeight)
+output.innerHTML += "<div>Comando desconhecido</div>";
 
 }
 
-})
+input.value="";
+
+}
+
+});
+
+}

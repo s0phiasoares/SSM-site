@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<title>SSM</title>
+<title>SSM Terminal</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,13 +18,15 @@
 </nav>
 </header>
 
-<div class="container">
-<h2>Bem vindo ao SSM</h2>
-<p>Sistema de simulação hacker.</p>
+<div class="terminal">
 
-<p>Acesse o terminal para iniciar o modo hacking.</p>
+<div id="output"></div>
 
-<a class="btn" href="terminal.html">Abrir Terminal</a>
+<div class="input-line">
+<span>> </span>
+<input id="command" autofocus>
+</div>
+
 </div>
 
 <script src="script.js"></script>

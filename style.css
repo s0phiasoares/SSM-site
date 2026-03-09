@@ -1,34 +1,64 @@
-body{
+ body{
 margin:0;
+font-family: monospace;
 background:black;
 color:#00ff00;
-font-family:Courier New, monospace;
 overflow:hidden;
-}
-
-#terminal{
-position:absolute;
-top:20px;
-left:20px;
-z-index:2;
-}
-
-.line{
-margin:5px 0;
-}
-
-input{
-background:black;
-border:none;
-color:#00ff00;
-font-family:Courier New;
-font-size:16px;
-outline:none;
 }
 
 canvas{
 position:fixed;
 top:0;
 left:0;
-z-index:1;
+z-index:-1;
 }
+
+header{
+display:flex;
+justify-content:space-between;
+padding:20px;
+background:rgba(0,0,0,0.7);
+}
+
+nav a{
+margin-left:20px;
+color:#00ff00;
+text-decoration:none;
+}
+
+.container{
+padding:40px;
+}
+
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:10px 20px;
+border:1px solid #00ff00;
+color:#00ff00;
+text-decoration:none;
+}
+
+.terminal{
+width:80%;
+height:60vh;
+margin:40px auto;
+border:1px solid #00ff00;
+padding:20px;
+overflow:auto;
+background:rgba(0,0,0,0.8);
+}
+
+.input-line{
+display:flex;
+}
+
+input{
+background:none;
+border:none;
+color:#00ff00;
+outline:none;
+width:100%;
+font-family:monospace;
+}
+
